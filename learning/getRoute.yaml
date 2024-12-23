@@ -1,0 +1,110 @@
+openapi: 3.0.0
+info:
+  title: User Management API
+  description: This API allows you to create a users
+  version: 1.0.0
+servers:
+  - url : http://localhost:3000
+    description: Development Server
+
+paths:
+  "/users":
+    post:
+      summary: Create a new user
+      description: This endpoint allows you to create a new user with the provided details (e.g., full name, email, etc.). The system will respond with the created user data.
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/UserData"
+                
+      responses:
+        "201": 
+          description: "Success Response"
+          content:
+            "application/json":
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: number
+                    example: 201
+                  message:
+                    type: string
+                    example: "User successfully created"
+                  data:
+                    $ref: "#/components/schemas/UserData"
+        "400":
+          description: Bad Request - Invalid input or missing required fields
+          content:
+            "application/json":
+              schema:
+                $ref: "#components/schemas/BadRequest"
+        "500":
+          description: "Internal Server Error - Something went wrong on the server"
+          content:
+            "application/json":
+              schema: 
+                $ref: "#/components/schemas/InternalServerError"           
+components:
+  schemas:
+    UserData:
+      type: object
+      properties:
+        fullName:
+          type: string
+          example: Moshfiqur Rahman
+        email: 
+          type: string
+          example: moshfiqur@gmail.com
+        password:
+          type: string
+          example: hashed_password
+          required:
+          - password 
+        role: 
+          type: string
+          default: user
+        status:
+          type: string
+          example: active
+          required:
+          - status
+        isDeleted:
+          type: boolean
+          default: false
+        createdAt:
+          type: string
+          format: date-time
+          example: "2024-12-23T15:30:00Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2024-12-23T15:30:00Z"
+    BadRequest:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          example: 400
+        success:
+          type: boolean
+          example: false
+        message: 
+          type: string
+          example: Invalid request parameters or missing required fields.
+    InternalServerError:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          example: 500
+        success:
+          type: boolean
+          example: false
+        message: 
+          type: string
+          example: "An unexpected error occurred. Please try again later."
