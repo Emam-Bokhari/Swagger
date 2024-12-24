@@ -13,6 +13,46 @@ paths:
         - users
       summary: Get all users 
       description: This endpoint retrieves a list of all users in the system.
+      parameters:
+        - name: search
+          in: query 
+          description: Search term to filter users by full name or email 
+          schema: 
+            type: string 
+            example: Moshfiqur Rahman
+        - name: sortBy
+          in: query 
+          description: Field by whic to sort the results.
+          required: false 
+          schema:
+            type: string 
+            enum: [createdAt,updatedAt,fullName,email]
+            example: createdAt
+        - name: sortOrder
+          in: query 
+          description: The order to sort the results. Use 'asc' and 'desc'
+          required: false 
+          schema:
+            type: string 
+            enum: [asc,desc]
+            example: asc
+        - name: filter
+          in: query 
+          description: Filter users by therir role in the system 
+          required: false 
+          schema:
+            type: string 
+            enum: [user,admin]
+            example: user
+        - name: fields
+          in: query 
+          description: Comma-separated list of fields to include in the response (e.g., `fullName,email,role`).
+          required: false 
+          schema: 
+            type: string 
+            example: fullName,email
+
+
       responses:
         "200": 
           description: Successfully fetched all users' data 
