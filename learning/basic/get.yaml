@@ -9,6 +9,8 @@ servers:
 paths:
   "/users":
     get:
+      tags:
+        - users
       summary: Get all users 
       description: This endpoint retrieves a list of all users in the system.
       responses:

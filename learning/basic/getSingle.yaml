@@ -1,0 +1,107 @@
+openapi: 3.0.0
+info:
+  title: User Management
+  description: GET Single user by ID
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Development Server 
+paths:
+  "/users/{id}":
+    get:
+      tags:
+        - User
+      summary: GET single user by ID 
+      description: Fetch single user
+      parameters:
+        - name: id
+          in: path
+          required: true 
+          description: Unique indentifier
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success Response 
+          content:
+            "application/json":
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                    example: 200
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: User is retrieved successfull
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 123
+                      fullName:
+                        type: string
+                        example: Moshfiqur Rahman
+                      email:
+                        type: string
+                        example: moshfiq@gmail.com
+                      role:
+                        type: array
+                        items:
+                          type: string
+                          example: user
+                      isDeleted:
+                        type: string
+                        example: false
+                      createdAt:
+                        type: string
+                        format: date-time
+                        example: "2024-12-23T15:30:00Z"
+                      updatedAt:
+                        type: string
+                        format: date-time 
+                        example: "2024-12-23T15:30:00Z"
+        "400":
+          description: Bad Request 
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/BadRequest" 
+            
+components:
+  schemas:
+    BadRequest:
+      type: object
+      properties:
+        statusCode: 
+          type: number 
+          example: 400
+        success:
+          type: boolean 
+          example: true
+        message:
+          type: string 
+          example: Bad Request
+        errorSources:
+          type: array 
+          items: 
+            type: object
+            properties:
+              path:
+                type: string
+                example: " "
+              message:
+                type: string
+                example: "Invalid input"
+              stack:
+                type: string 
+                example: " "
+          
+            
+            
+
+              
