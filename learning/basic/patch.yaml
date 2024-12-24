@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: Update user
+  description: Update a user 
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Development Server 
+paths:
+  "/users/{id}":
+    patch:
+      tags:
+        - User
+      summary: Update a user by ID 
+      description: Update a user's information in the database
+      operationId: updateUser
+      parameters:
+        - name: id 
+          in: path 
+          required: true 
+          description: The ID of the user to update 
+          schema:
+            type: string 
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              type: object
+              properties:
+                name: 
+                  type: string 
+                  description: The user's updated name
+                  example: Emam Bokhari
+      responses:
+        "200":
+          description: Success Response 
+          content:
+            "application/json":
+              schema:
+                type: object 
+                properties: 
+                  statusCode:
+                    type: number 
+                    example: 200
+                  success:
+                    type: boolean 
+                    example: true 
+                  message:
+                    type: string 
+                    example: User is updated successfully
+                  data:
+                    type: object
+                    properties:
+                      name:
+                        type: string 
+                        example: Emam Bokhari 
+                      
+
