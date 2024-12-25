@@ -4,7 +4,7 @@ info:
   description: This API allows you to retrieve all user data. 
   version: 1.0.0
 servers:
-  - url: http://localhost:3000
+  - url: http://localhost:3000/api-docs
     description: Development Server 
 paths:
   "/users":
@@ -105,3 +105,6 @@ paths:
                           format: date-time
                           example: "2024-12-23T15:30:00Z"
                           description: The date and time when the user's information was last updated
+
+
+

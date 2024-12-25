@@ -1,0 +1,66 @@
+openapi: 3.0.0
+info:
+  title: Practice oneOf
+  description: Real world oneOf practice and usecase
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Development Server
+paths:
+  "/auth/users/registration":
+    post:
+      summary: Registration
+      description: User Registration
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/UserRegistrationData"
+                - $ref: "#/components/schemas/UserIDLogin"
+      responses:
+        "200":
+          description: Success Response
+          content:
+            "application/json":
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                    example: 201
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: User registration successfully
+                  data:
+                    oneOf:
+                      - $ref: "#/components/schemas/UserRegistrationData"
+                      - $ref: "#/components/schemas/UserIDLogin"
+components:
+  schemas:
+    UserRegistrationData:
+      type: object
+      properties:
+        fullName:
+          type: string
+          example: Moshfiqur Rahman
+        email: 
+          type: string
+          example: moshfiqur@gmail.com
+        password:
+          type: string
+          format: password
+          example: moshfiq123
+    UserIDLogin:
+      type: object
+      properties:
+        id: 
+          type: string
+          example: PAT001
+        password:
+          type: string
+          format: password
+          example: moshfiq123 
