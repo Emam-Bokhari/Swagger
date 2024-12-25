@@ -1,0 +1,45 @@
+openapi: 3.0.0
+info:
+  title: anyOf Example
+  description: Demonstrating how anyOf works in OpenAPI
+  version: 1.0.0
+paths:
+  /users:
+    get:
+      summary: Get a user
+      description: Retrieve a user with basic or extended details
+      responses:
+        "200":
+          description: A user object with basic or extended details
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: "#/components/schemas/BasicUser"
+                  - $ref: "#/components/schemas/ExtendedUser"
+components:
+  schemas:
+    BasicUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: johndoe
+    ExtendedUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: johndoe
+        fullName:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: johndoe@example.com
