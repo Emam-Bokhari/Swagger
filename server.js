@@ -1,11 +1,12 @@
 import express from "express";
 import swaggerUi from "swagger-ui-express";
 import YAML from "yamljs";
+import dotenv from "dotenv";
 
 // create express application
 const app = express();
-const port = 3000;
-
+dotenv.config();
+const port = process.env.PORT;
 // load YAML file
 const swaggerDocument = YAML.load("./learning/basic/get.yaml");
 
