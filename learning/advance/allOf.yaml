@@ -1,0 +1,48 @@
+openapi: 3.0.0
+info:
+  title: Practice allOf
+  description: allOf with real example
+  version: 1.0.0 
+servers:
+  - url: http://localhost:3000
+    description: Development Server
+paths:
+  "/users": 
+    get:
+      summary: allOf
+      description: Merge schemas 
+      responses:
+        "200": 
+          description: Success Response 
+          content:
+            "application/json":
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/LoginInfo"
+                  - $ref: "#/components/schemas/UserInfo" 
+
+
+components:
+  schemas:
+    LoginInfo:
+      type: object 
+      properties:
+        email:
+          type: string 
+          format: email
+          example: moshfiq@gmail.com  
+        password: 
+          type: string 
+          format: password 
+          example: user123
+    UserInfo: 
+      type: object 
+      properties:
+        name: 
+          type: string 
+          example: Moshfiqur Rahman 
+        address:
+          type: string 
+          example: Brahmanbaria
+          
+          

@@ -41,7 +41,6 @@ app.get("/users", (req, res) => {
   ]);
 });
 
-// API স্রোত শুরু
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
